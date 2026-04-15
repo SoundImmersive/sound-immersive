@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog immersif pro</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Arial, sans-serif; background:#000; color:#fff; overflow:hidden; }
+
+    .list {
+      position:absolute;
+      width:100%;
+      height:100vh;
+      background:#111;
+      padding:40px;
+    }
+
+    .article {
+      font-size:28px;
+      padding:20px;
+      border-bottom:1px solid #333;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .article:hover {
+      background:#222;
+      transform:translateX(10px);
+    }
+
+    .viewer {
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:#000;
+      display:none;
+      overflow:hidden;
+    }
+
+    .viewer.active { display:block; }
+
+    .slide {
+      position:absolute;
+      width:100%; height:100%;
+      background-size:cover;
+      background-position:center;
+      opacity:0;
+      transition:opacity 1s ease;
+    }
+
+    .slide.active { opacity:1; }
+
+    .overlay {
+      position:absolute;
+      bottom:40px;
+      left:40px;
+      background:rgba(0,0,0,0.4);
+      padding:20px;
+      border-radius:10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .title {
+      font-size:32px;
+      margin-bottom:10px;
+    }
+
+    .close {
+      position:absolute;
+      top:20px;
+      right:30px;
+      font-size:30px;
+      cursor:pointer;
+    }
+
+    .nav {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:40px;
+      cursor:pointer;
+      padding:20px;
+      user-select:none;
+    }
+
+    .prev { left:0; }
+    .next { right:0; }
+
+    audio { display:none; }
+  </style>
+</head>
+<body>
+
+<div class="list" id="list"></div>
+
+<div class="viewer" id="viewer">
+  <div class="close" onclick="closeViewer()">✕</div>
+  <div class="nav prev" onclick="prevSlide()">❮</div>
+  <div class="nav next" onclick="nextSlide()">❯</div>
+  <div id="slides"></div>
+  <div class="overlay">
+    <div class="title" id="title"></div>
+    <div id="description"></div>
+  </div>
+  <audio id="audio" loop></audio>
+</div>
+
+<script>
+const articles = [
+  {
+    title: "Voyage en montagne",
+    description: "Une immersion dans les sommets.",
+    images: [
+      "https://picsum.photos/id/1018/1920/1080",
+      "https://picsum.photos/id/1015/1920/1080"
+    ],
+    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+  },
+  {
+    title: "Ville de nuit",
+    description: "Lumières et solitude urbaine.",
+    images: [
+      "https://picsum.photos/id/1011/1920/1080",
+      "https://picsum.photos/id/984/1920/1080"
+    ],
+    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+  }
+];
+
+const list = document.getElementById("list");
+const viewer = document.getElementById("viewer");
+const slidesContainer = document.getElementById("slides");
+const audio = document.getElementById("audio");
+
+let currentIndex = 0;
+let currentArticle = null;
+
+articles.forEach((a, i) => {
+  const div = document.createElement("div");
+  div.className = "article";
+  div.innerText = a.title;
+  div.onclick = () => openArticle(i);
+  list.appendChild(div);
+});
+
+function openArticle(index) {
+  currentArticle = articles[index];
+  currentIndex = 0;
+
+  slidesContainer.innerHTML = "";
+
+  currentArticle.images.forEach((img, i) => {
+    const div = document.createElement("div");
+    div.className = "slide";
+    div.style.backgroundImage = `url(${img})`;
+    if(i === 0) div.classList.add("active");
+    slidesContainer.appendChild(div);
+  });
+
+  document.getElementById("title").innerText = currentArticle.title;
+  document.getElementById("description").innerText = currentArticle.description;
+
+  audio.src = currentArticle.audio;
+  audio.play();
+
+  viewer.classList.add("active");
+}
+
+function showSlide(index) {
+  const slides = document.querySelectorAll(".slide");
+  slides.forEach(s => s.classList.remove("active"));
+  slides[index].classList.add("active");
+}
+
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % currentArticle.images.length;
+  showSlide(currentIndex);
+}
+
+function prevSlide() {
+  currentIndex = (currentIndex - 1 + currentArticle.images.length) % currentArticle.images.length;
+  showSlide(currentIndex);
+}
+
+function closeViewer() {
+  viewer.classList.remove("active");
+  audio.pause();
+}
+
+// navigation clavier
+window.addEventListener("keydown", e => {
+  if(!viewer.classList.contains("active")) return;
+  if(e.key === "ArrowRight") nextSlide();
+  if(e.key === "ArrowLeft") prevSlide();
+  if(e.key === "Escape") closeViewer();
+});
+</script>
+
+</body>
+</html>
