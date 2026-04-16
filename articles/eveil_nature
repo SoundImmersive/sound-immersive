@@ -1,0 +1,94 @@
+<!-- ===================== -->
+<!-- TEMPLATE 1 : IMAGES + AUDIO -->
+<!-- ===================== -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article - Voyage</title>
+
+<!-- Open Graph (preview réseaux) -->
+<meta property="og:title" content="Voyage en montagne">
+<meta property="og:description" content="Immersion visuelle et sonore">
+<meta property="og:image" content="https://tonsite.com/images/preview.jpg">
+<meta property="og:type" content="website">
+
+<style>
+body { margin:0; background:#000; overflow:hidden; }
+
+.slide {
+  position:fixed;
+  inset:0;
+  background-size:cover;
+  background-position:50% 30%;
+  opacity:0;
+  transition:opacity 1.5s ease;
+}
+
+.slide.active {
+  opacity:1;
+  animation: zoom 20s ease-in-out forwards;
+}
+
+@keyframes zoom {
+  0% { transform: scale(1.05) translate(0,0); }
+  100% { transform: scale(1.2) translate(-3%,-3%); }
+}
+
+.overlay {
+  position:fixed;
+  bottom:40px;
+  left:40px;
+  color:white;
+  background:rgba(0,0,0,0.4);
+  padding:20px;
+  backdrop-filter: blur(10px);
+}
+</style>
+</head>
+<body>
+
+<div id="slides"></div>
+<div class="overlay">
+  <h1>Voyage en montagne</h1>
+  <p>Une immersion dans les sommets</p>
+</div>
+
+<audio id="audio" src="audio/musique.mp3" loop autoplay></audio>
+
+<script>
+const images = [
+  "images/photo1.jpg",
+  "images/photo2.jpg",
+  "images/photo3.jpg"
+];
+
+const container = document.getElementById("slides");
+let index = 0;
+
+images.forEach((img,i)=>{
+  const div = document.createElement("div");
+  div.className = "slide";
+  div.style.backgroundImage = `url(${img})`;
+  if(i===0) div.classList.add("active");
+  container.appendChild(div);
+});
+
+function next(){
+  const slides = document.querySelectorAll(".slide");
+  slides[index].classList.remove("active");
+
+  index = (index+1)%slides.length;
+
+  slides[index].style.animation = "none";
+  slides[index].offsetHeight;
+  slides[index].style.animation = null;
+  slides[index].classList.add("active");
+}
+
+setInterval(next, 6000);
+</script>
+
+</body>
+</html>
