@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Article - Voyage</title>
+<title>Eveil de la nature sur les rives de l'Yvette</title>
 
 <!-- Open Graph (preview réseaux) -->
-<meta property="og:title" content="Voyage en montagne">
+<meta property="og:title" content="Eveil de la nature sur les rives de l'Yvette">
 <meta property="og:description" content="Immersion visuelle et sonore">
 <meta property="og:image" content="https://tonsite.com/images/preview.jpg">
 <meta property="og:type" content="website">
@@ -51,15 +51,15 @@ body { margin:0; background:#000; overflow:hidden; }
 
 <div id="slides"></div>
 <div class="overlay">
-  <h1>Voyage en montagne</h1>
-  <p>Une immersion dans les sommets</p>
+  <h1>Eveil de la nature</h1>
+  <p>Fermez les yeux, vous y êtes !</p>
 </div>
 
 <audio id="audio" src="audio/musique.mp3" loop autoplay></audio>
 
 <script>
 const images = [
-  "images/photo1.jpg",
+  "image/testimage.jpg",
   "images/photo2.jpg",
   "images/photo3.jpg"
 ];
