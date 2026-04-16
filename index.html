@@ -1,112 +1,121 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog immersif pro</title>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: Arial, sans-serif; background:#000; color:#fff; overflow:hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Portfolio Immersif</title>
 
-    .list {
-      position:absolute;
-      width:100%;
-      height:100vh;
-      background:#111;
-      padding:40px;
-    }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; background:#000; color:#fff; }
 
-    .article {
-      font-size:28px;
-      padding:20px;
-      border-bottom:1px solid #333;
-      cursor:pointer;
-      transition:0.3s;
-    }
+.hero {
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
 
-    .article:hover {
-      background:#222;
-      transform:translateX(10px);
-    }
+.hero video {
+  position:absolute;
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:brightness(0.6);
+}
 
-    .viewer {
-      position:fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      background:#000;
-      display:none;
-      overflow:hidden;
-    }
+.hero-content {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%, -50%);
+  text-align:center;
+}
 
-    .viewer.active { display:block; }
+.hero h1 {
+  font-size:60px;
+  letter-spacing:2px;
+}
 
-    .slide {
-      position:absolute;
-      width:100%; height:100%;
-      background-size:cover;
-      background-position:center;
-      opacity:0;
-      transition:opacity 1s ease;
-    }
+.hero p {
+  margin-top:10px;
+  opacity:0.8;
+}
 
-    .slide.active { 
-      opacity:1; 
-      animation: zoom 20s ease-in-out forwards;
-    }
-      @keyframes zoom {
-        00% {
-        transform: scale(1) translate(0, 0);
-        }
-        100% {
-        transform: scale(1.15) translate(-2%, -2%);
-             }
-        }
-    .overlay {
-      position:absolute;
-      bottom:40px;
-      left:40px;
-      background:rgba(0,0,0,0.4);
-      padding:20px;
-      border-radius:10px;
-      backdrop-filter: blur(10px);
-    }
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+}
 
-    .title {
-      font-size:32px;
-      margin-bottom:10px;
-    }
+.card {
+  position:relative;
+  height:400px;
+  cursor:pointer;
+  overflow:hidden;
+}
 
-    .close {
-      position:absolute;
-      top:20px;
-      right:30px;
-      font-size:30px;
-      cursor:pointer;
-    }
+.card img {
+  width:100%; height:100%;
+  object-fit:cover;
+  transition:transform 1s ease;
+}
 
-    .nav {
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      font-size:40px;
-      cursor:pointer;
-      padding:20px;
-      user-select:none;
-    }
+.card:hover img {
+  transform:scale(1.1);
+}
 
-    .prev { left:0; }
-    .next { right:0; }
+.card-overlay {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:20px;
+  background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
 
-    audio { display:none; }
-  </style>
+.card h2 { font-size:22px; }
+.card p { font-size:14px; opacity:0.8; }
+
+footer {
+  text-align:center;
+  padding:40px;
+  opacity:0.5;
+}
+</style>
 </head>
 <body>
 
-<div onclick="location.href='articles/montagne.html'">
-  Voyage en montagne
+<!-- HERO -->
+<div class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="videos/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h1>Mon Univers</h1>
+    <p>Expériences visuelles & sonores</p>
+  </div>
 </div>
 
-<div onclick="location.href='articles/film.html'">
-  Film immersif
+<!-- GALLERY -->
+<div class="gallery">
+
+  <div class="card" onclick="location.href='articles/montagne.html'">
+    <img src="images/preview-montagne.jpg">
+    <div class="card-overlay">
+      <h2>Voyage en montagne</h2>
+      <p>Immersion naturelle</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="location.href='articles/film.html'">
+    <img src="images/preview-film.jpg">
+    <div class="card-overlay">
+      <h2>Film immersif</h2>
+      <p>Expérience vidéo</p>
+    </div>
+  </div>
+
 </div>
+
+<footer>
+  © Mon Portfolio
+</footer>
+
 </body>
 </html>
