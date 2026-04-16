@@ -187,7 +187,14 @@ function openArticle(index) {
 
 function showSlide(index) {
   const slides = document.querySelectorAll(".slide");
-  slides.forEach(s => s.classList.remove("active"));
+
+  slides.forEach(s => {
+    s.classList.remove("active");
+    s.style.animation = "none";
+    s.offsetHeight; // force reflow
+    s.style.animation = null;
+  });
+
   slides[index].classList.add("active");
 }
 
