@@ -46,12 +46,7 @@
       background-position:center;
       opacity:0;
       transition:opacity 1s ease;
-    }
 
-    .slide.active { opacity:1; 
-      #Effet Ken Burns
-      transform: scale(1);
-      animation: zoom 20s ease-in-out forwards;
       @keyframes zoom {
         00% {
         transform: scale(1) translate(0, 0);
@@ -60,6 +55,11 @@
         transform: scale(1.15) translate(-2%, -2%);
              }
         }
+    }
+
+    .slide.active { 
+      opacity:1; 
+      animation: zoom 20s ease-in-out forwards;
     }
     .overlay {
       position:absolute;
