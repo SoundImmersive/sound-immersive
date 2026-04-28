@@ -53,6 +53,25 @@ body { margin:0; background:#000; overflow:hidden; }
   padding:20px;
   backdrop-filter: blur(10px);
 }
+
+#soundButton {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+#soundButton:hover {
+  background: rgba(255,255,255,0.2);
+}
+  
 </style>
 </head>
 <body>
@@ -66,6 +85,15 @@ body { margin:0; background:#000; overflow:hidden; }
 <audio id="audio" src="../audio/150426-0858-H1e-StRemy-Riviere-bnc-low.wav" loop></audio>
 
 <script>
+const btn = document.getElementById("soundButton");
+const audio = document.getElementById("audio");
+
+btn.addEventListener("click", () => {
+  audio.play();
+  btn.style.opacity = "0";
+  setTimeout(() => btn.style.display = "none", 300);
+});
+
 document.body.addEventListener("click", () => {
   const audio = document.getElementById("audio");
   audio.play();
@@ -99,5 +127,7 @@ function next(){
 setInterval(next, 20000);
 </script>
 
+<div id="soundButton">🔊 Activer le son</div>
+  
 </body>
 </html>
