@@ -20,6 +20,7 @@ body { margin:0; background:#000; overflow:hidden; }
 .slide {
   position:fixed;
   inset:0;
+  z-index: 1;
   background-size:cover;
   background-position:50% 40%;
   opacity:0;
@@ -66,6 +67,7 @@ body { margin:0; background:#000; overflow:hidden; }
   cursor: pointer;
   backdrop-filter: blur(10px);
   transition: 0.3s;
+  z-index: 10; /* important */
 }
 
 .soundButton:hover {
