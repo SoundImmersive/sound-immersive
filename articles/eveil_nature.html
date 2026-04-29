@@ -123,7 +123,10 @@ s.forEach((src, i) => {
       div.style.backgroundSize = "cover";
       div.style.backgroundPosition = "center";
     }
-
+{
+  src: "...",
+  focus: "top" // ou center, bottom
+}
     div.style.backgroundImage = `url(${src})`;
 
     if (i === 0) div.classList.add("active");
@@ -143,10 +146,7 @@ function next(){
 }
 
 setInterval(next, 20000);
-{
-  src: "...",
-  focus: "top" // ou center, bottom
-}
+
 </script>
   
 </body>
