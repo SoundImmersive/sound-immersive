@@ -1,1 +1,168 @@
+<!-- ===================== -->
+<!-- TEMPLATE 1 : S + AUDIO -->
+<!-- ===================== -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eveil de la nature sur les rives de l'Yvette</title>
 
+<!-- Open Graph (preview réseaux) -->
+<meta property="og:title" content="Eveil de la nature sur les rives de l'Yvette">
+<meta property="og:description" content="Immersion visuelle et sonore">
+<meta property="og:image" content="https://tonsite.com/images/preview.jpg">
+<meta property="og:type" content="website">
+
+<style>
+body { margin:0; background:#000; overflow:hidden; }
+
+.slide {
+  position:fixed;
+  inset:0;
+  z-index: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position:50% 40%;
+  opacity:0;
+  transition: opacity 3s ease-in-out;
+}
+
+.slide.active {
+  opacity:1;
+  animation: cinematicMove 25s ease-in-out infinite;
+  // animation: zoomLoop 20s ease-in-out infinite
+}
+  
+@keyframes cinematicMove {
+  0% {
+    transform: scale(1.02) translate(0%, 0%);
+  }
+  25% {
+    transform: scale(1.05) translate(-1%, -1%);
+  }
+  50% {
+    transform: scale(1.08) translate(-2%, 1%);
+  }
+  75% {
+    transform: scale(1.05) translate(1%, 2%);
+  }
+  100% {
+    transform: scale(1.02) translate(0%, 0%);
+  }
+}
+  
+@keyframes zoomLoop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08) translate(-1%, -1%);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.overlay {
+  position:fixed;
+  bottom:40px;
+  left:40px;
+  color:white;
+  background:rgba(0,0,0,0.4);
+  padding:20px;
+  backdrop-filter: blur(10px);
+}
+
+#soundButton {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+  z-index: 10; /* important */
+}
+
+#soundButton:hover {
+  background: rgba(255,255,255,0.2);
+}
+  
+</style>
+</head>
+<body>
+
+<div id="slides"></div>
+<div class="overlay">
+  <h1>Eveil de la nature</h1>
+  <p>Fermez les yeux, vous y êtes !</p>
+</div>
+
+<audio id="audio" src="../audio/150426-0858-H1e-StRemy-Riviere-bnc-low.wav" loop></audio>
+
+<div id="soundButton">🔊 Activer le son</div>
+  
+<script>
+const btn = document.getElementById("soundButton");
+const audio = document.getElementById("audio");
+
+btn.addEventListener("click", () => {
+audio.play();
+btn.style.opacity = "0";
+setTimeout(() => btn.style.display = "none", 300);
+});
+
+const s = [
+  {
+    src: "../image/260415-0858-h1e-stremy-yvette.jpg",
+    focus: "bottom" // ou center, top
+  }
+];
+
+const container = document.getElementById("slides");
+
+s.forEach((item, i) => {
+  const div = document.createElement("div");
+  div.className = "slide";
+
+  div.style.backgroundImage = `url(${item.src})`;
+
+  // 🎯 Cadrage selon focus
+  switch(item.focus) {
+    case "top":
+      div.style.backgroundPosition = "50% 20%";
+      break;
+    case "bottom":
+      div.style.backgroundPosition = "50% 80%";
+      break;
+    default:
+      div.style.backgroundPosition = "50% 50%";
+  }
+
+  if (i === 0) div.classList.add("active");
+
+  container.appendChild(div);
+});
+  
+function next(){
+  const slides = document.querySelectorAll(".slide");
+
+  slides[index].classList.remove("active");
+
+  index = (index + 1) % slides.length;
+
+  slides[index].classList.add("active");
+}
+
+setInterval(next, 25000);
+
+</script>
+  
+</body>
+</html>
