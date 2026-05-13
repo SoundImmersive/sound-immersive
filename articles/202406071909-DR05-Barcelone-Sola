@@ -131,7 +131,6 @@ btn.style.opacity = "0";
 setTimeout(() => btn.style.display = "none", 300);
 });
 
-const btn = document.getElementById("soundButton");
 const player = document.getElementById("bandcamp-player");
 
 btn.addEventListener("click", () => {
