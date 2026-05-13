@@ -95,12 +95,17 @@ body { margin:0; background:#000; overflow:hidden; }
 }
 
 #bandcamp-player {
+  display:none;
+}
+
+#bandcamp-player {
   position: fixed;
   bottom: 30px;
   right: 30px;
   z-index: 20;
   opacity: 0.85;
 }
+
   
 </style>
 </head>
@@ -114,7 +119,7 @@ body { margin:0; background:#000; overflow:hidden; }
 
 <audio id="audio" src="../audio/202507142330-X8-Nice.wav" loop></audio>
 
-<div id="soundButton">🔊 Activer le son</div>
+<div id="soundButton">🎧 Écouter l’ambiance sonore</div>
   
 <script>
 const btn = document.getElementById("soundButton");
@@ -126,6 +131,13 @@ btn.style.opacity = "0";
 setTimeout(() => btn.style.display = "none", 300);
 });
 
+const btn = document.getElementById("soundButton");
+const player = document.getElementById("bandcamp-player");
+
+btn.addEventListener("click", () => {
+  player.style.display = "block";
+  btn.style.display = "none";
+});
 const s = [
   {
     src: "../image/202406071909-DR05-Barcelone-Sola-main.jpg",
