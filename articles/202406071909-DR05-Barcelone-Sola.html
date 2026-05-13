@@ -117,19 +117,10 @@ body { margin:0; background:#000; overflow:hidden; }
   <p>Fermez les yeux, vous y êtes !</p>
 </div>
 
-<audio id="audio" src="../audio/202507142330-X8-Nice.wav" loop></audio>
-
 <div id="soundButton">🎧 Écouter l’ambiance sonore</div>
   
 <script>
 const btn = document.getElementById("soundButton");
-const audio = document.getElementById("audio");
-
-btn.addEventListener("click", () => {
-audio.play();
-btn.style.opacity = "0";
-setTimeout(() => btn.style.display = "none", 300);
-});
 
 const player = document.getElementById("bandcamp-player");
 
