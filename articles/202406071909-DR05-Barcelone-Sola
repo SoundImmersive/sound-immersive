@@ -93,6 +93,14 @@ body { margin:0; background:#000; overflow:hidden; }
 #soundButton:hover {
   background: rgba(255,255,255,0.2);
 }
+
+#bandcamp-player {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 20;
+  opacity: 0.85;
+}
   
 </style>
 </head>
@@ -161,8 +169,11 @@ function next(){
 }
 
 setInterval(next, 25000);
-
 </script>
+
+<div id="bandcamp-player">
+<iframe style="border: 0; width: 100%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/album=2277493417/size=small/bgcol=333333/linkcol=9a64ff/artwork=none/transparent=true/" seamless><a href="https://isound.bandcamp.com/album/sound-immersive-barcelone">Sound Immersive : Barcelone by Sound Immersive</a></iframe>
+</div>
   
 </body>
 </html>
