@@ -36,3 +36,19 @@ Catégorie	Ce qu’on y met
 🎭 Culture & événements	----concerts, festivals, spectacles, manifestations culturelles…
 🧑‍🤝‍🧑 Vie locale	--------------terrasses, fêtes, rassemblements, scènes de vie quotidienne…
 🏭 Industrie & travail -----ateliers, usines, chantiers, activités professionnelles…
+
+
+Chaque photo possède son orientation directement dans le tableau :
+DANS ARTICLES
+{
+  src: "../image/veron1.jpg",
+  focus: "center",
+  orientation: "right"
+}
+
+Donc pour chaque photo, tu renseignes simplement :
+
+front  = devant
+back   = derrière
+right  = droite
+left   = gauche
