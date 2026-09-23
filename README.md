@@ -37,6 +37,7 @@ Catégorie	Ce qu’on y met
 🧑‍🤝‍🧑 Vie locale	--------------terrasses, fêtes, rassemblements, scènes de vie quotidienne…
 🏭 Industrie & travail -----ateliers, usines, chantiers, activités professionnelles…
 
+--------------------------------------------------------------------------------------------
 
 Chaque photo possède son orientation directement dans le tableau :
 DANS ARTICLES
@@ -52,3 +53,8 @@ front  = devant
 back   = derrière
 right  = droite
 left   = gauche
+--------------------------------------------------------------------------
+
+
+Photos paysage : 3840 × 2160 px, 16:9
+Photos verticales : conserver leur format vertical, ne pas les déformer
