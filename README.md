@@ -63,7 +63,25 @@ Photos verticales : conserver leur format vertical, ne pas les déformer
 
 Nouvel article : A modifier:
 
+ligne 6 - Title
 
+pour le preview:
+ligne 8   
+ligne 9
+ligne 10
+ligne 12
+
+ligne 16
+ligne 17
+ligne 18
+
+ligne 398 - Bandcamp player
+
+ligne 411 - SlideDuration (optionnel)
+
+ligne 426 - A partir de ligne 426 liste des photos avec pour chacune l'orientation photo
+
+-------------------------------------------------------------------------------
 
 
 
