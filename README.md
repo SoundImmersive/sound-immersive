@@ -58,3 +58,12 @@ left   = gauche
 
 Photos paysage : 3840 × 2160 px, 16:9
 Photos verticales : conserver leur format vertical, ne pas les déformer
+
+---------------------------------------------------------------------------
+
+Nouvel article : A modifier:
+
+
+
+
+
