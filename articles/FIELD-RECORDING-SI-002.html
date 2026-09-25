@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place de la Mairie, le calme d’une fin d’après-midi à Véron</title>
+
+<meta property="og:title" content="Place de la Mairie, le calme d’une fin d’après-midi à Véron">
+<meta property="og:description" content="DESCRIPTION DE TON ARTICLE">
+<meta property="og:image" content="https://soundimmersive.github.io/sound-immersive/image/verontitre.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://soundimmersive.github.io/sound-immersive/articles/FIELD-RECORDING-SI-002.html">
+<meta property="og:site_name" content="SOUND IMMERSIVE">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Place de la Mairie, le calme d’une fin d’après-midi à Véron">
+<meta name="twitter:description" content="DESCRIPTION DE TON ARTICLE">
+<meta name="twitter:image" content="https://soundimmersive.github.io/sound-immersive/image/verontitre.jpg">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #000;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   IDENTITÉ EN HAUT DE PAGE
+   ========================= */
+
+.top-left-brand {
+  position: fixed;
+  top: 28px;
+  left: 40px;
+  z-index: 20;
+  color: white;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
+
+.top-left-brand .brand-name {
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.top-left-brand .brand-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+  opacity: 0.95;
+}
+
+.top-left-brand .brand-tagline {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
+/* =========================
+   DIAPORAMA
+   ========================= */
+
+#slides {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+.slide {
+  position: fixed;
+  inset: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #000;
+  background-position: 50% 50%;
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  animation: cinematicMove var(--slide-duration) ease-in-out infinite;
+}
+
+@keyframes cinematicMove {
+  0% {
+    transform: scale(1.02) translate(0%, 0%);
+  }
+  25% {
+    transform: scale(1.05) translate(-1%, -1%);
+  }
+  50% {
+    transform: scale(1.08) translate(-2%, 1%);
+  }
+  75% {
+    transform: scale(1.05) translate(1%, 2%);
+  }
+  100% {
+    transform: scale(1.02) translate(0%, 0%);
+  }
+}
+
+/* =========================
+   TEXTE
+   ========================= */
+
+.overlay {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  color: white;
+  background: transparent;
+  padding: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  z-index: 10;
+  width: min(560px, calc(50vw - 170px));
+  max-width: 560px;
+}
+
+.overlay h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.overlay p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* =========================
+   INDICATEUR ORIENTATION
+   ========================= */
+
+#orientation-indicator {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 30;
+  color: white;
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+#orientation-indicator .orientation-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 4px;
+}
+
+#orientation-indicator .orientation-label {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* =========================
+   PANNEAU ORIENTATION
+   ========================= */
+
+#orientation-panel {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translate(-50%, 130%);
+  z-index: 40;
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 18px;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(14px);
+  transition: transform 0.35s ease;
+}
+
+#orientation-panel.visible {
+  transform: translate(-50%, 0);
+}
+
+.orientation-button {
+  width: 82px;
+  height: 82px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: 0.25s;
+}
+
+.orientation-button:hover {
+  background: rgba(255,255,255,0.14);
+}
+
+.orientation-button.active {
+  border-color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.13);
+}
+
+.orientation-button.disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.orientation-button .orientation-icon {
+  width: 42px;
+  height: 42px;
+}
+
+.orientation-button span {
+  font-size: 11px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+/* =========================
+   BOUTON AFFICHER ORIENTATIONS
+   ========================= */
+
+#orientation-toggle {
+  position: fixed;
+  right: 30px;
+  bottom: 80px;
+  z-index: 50;
+  border: 1px solid rgba(255,255,255,0.30);
+  border-radius: 28px;
+  padding: 11px 17px;
+  color: white;
+  background: rgba(0,0,0,0.60);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.25s;
+}
+
+#orientation-toggle:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* =========================
+   LECTEUR BANDCAMP
+   ========================= */
+
+#bandcamp-player {
+  position: fixed;
+  right: 30px;
+  bottom: 25px;
+  width: 300px;
+  height: 42px;
+  z-index: 35;
+  opacity: 0.85;
+}
+
+#bandcamp-player iframe {
+  display: block;
+  width: 100%;
+  height: 42px;
+  border: 0;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+  .overlay {
+    left: 15px;
+    bottom: 105px;
+    width: calc(100% - 30px);
+    max-width: calc(100% - 30px);
+    padding: 14px;
+  }
+
+  .overlay h1 {
+    font-size: 18px;
+  }
+
+  #orientation-indicator {
+    bottom: 18px;
+  }
+
+  #orientation-panel {
+    max-width: calc(100% - 20px);
+    gap: 5px;
+    padding: 7px;
+  }
+
+  .orientation-button {
+    width: 68px;
+    height: 70px;
+  }
+
+  #orientation-toggle {
+    right: 15px;
+    bottom: 15px;
+  }
+
+  #bandcamp-player {
+    right: 15px;
+    bottom: 62px;
+    width: 280px;
+    max-width: calc(100vw - 30px);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="slides"></div>
+
+<!-- Identité Sound Immersive -->
+<div class="top-left-brand">
+  <div class="brand-name">SOUND IMMERSIVE</div>
+  <div class="brand-subtitle">Patrimoine et mémoire sonore</div>
+  <div class="brand-tagline">Explorer le monde autrement</div>
+</div>
+
+<div class="overlay">
+  <p>Fermez les yeux, vous y êtes !</p>
+</div>
+
+<!-- Indicateur permanent : orientation de la photo actuellement affichée -->
+<div id="orientation-indicator">
+  <div class="orientation-icon" id="currentOrientationIcon"></div>
+  <div class="orientation-label" id="currentOrientationLabel">Devant</div>
+</div>
+
+<!-- Bouton qui ouvre/ferme les 4 orientations -->
+<button id="orientation-toggle">◎ Orientation du micro</button>
+
+<div id="orientation-panel">
+  <button class="orientation-button" data-orientation="front">
+    <div class="orientation-icon"></div>
+    <span>Devant</span>
+  </button>
+
+  <button class="orientation-button" data-orientation="back">
+    <div class="orientation-icon"></div>
+    <span>Derrière</span>
+  </button>
+
+  <button class="orientation-button" data-orientation="right">
+    <div class="orientation-icon"></div>
+    <span>Droite</span>
+  </button>
+
+  <button class="orientation-button" data-orientation="left">
+    <div class="orientation-icon"></div>
+    <span>Gauche</span>
+  </button>
+</div>
+
+<!-- Lecteur Bandcamp : visible directement, sans bouton intermédiaire. -->
+<div id="bandcamp-player">
+  <iframe
+    src="https://bandcamp.com/EmbeddedPlayer/album=3520980345/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/"
+    seamless>
+    <a href="https://isound.bandcamp.com/album/sound-of-v-ron">
+      Sound of Véron by Antoine Chioccarello
+    </a>
+  </iframe>
+</div>
+
+<script>
+/* =========================================================
+   RÉGLAGES DE L’ARTICLE
+   ========================================================= */
+
+/* Durée de chaque photo en secondes */
+const slideDuration = 25;
+
+/*
+   Pour chaque photo :
+   - src = nom du fichier
+   - focus = cadrage de la photo
+   - orientation = direction vers laquelle regarde le micro
+
+   orientation possible :
+   front = devant
+   back  = derrière
+   right = droite
+   left  = gauche
+*/
+
+const s = [
+  {
+    src: "../image/verontitre.jpg",
+    focus: "center",
+    orientation: "left"
+  },
+  {
+    src: "../image/veron1.jpg",
+    focus: "center",
+    orientation: "right"
+  },
+  {
+    src: "../image/veron2.jpg",
+    focus: "center",
+    orientation: "left"
+  },
+  {
+    src: "../image/veron3.jpg",
+    focus: "center",
+    orientation: "front"
+  },
+  {
+    src: "../image/veron4.jpg",
+    focus: "center",
+    orientation: "right"
+  },
+  {
+    src: "../image/veron5.jpg",
+    focus: "center",
+    orientation: "back"
+  }
+];
+
+/* =========================================================
+   ICÔNE MICRO / CASQUE VUE DU DESSUS
+   ========================================================= */
+
+function orientationSVG(direction) {
+
+  const arrows = {
+    front: '<polygon points="50,3 42,14 58,14" />',
+    back: '<polygon points="50,97 42,86 58,86" />',
+    right: '<polygon points="97,50 86,42 86,58" />',
+    left: '<polygon points="3,50 14,42 14,58" />'
+  };
+
+  return `
+    <svg viewBox="0 0 100 100"
+         xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+      <g fill="none"
+         stroke="currentColor"
+         stroke-width="5"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+        <circle cx="50" cy="50" r="25"></circle>
+        <path d="M25 48 C25 25, 75 25, 75 48"></path>
+        <path d="M25 48 L25 65"></path>
+        <path d="M75 48 L75 65"></path>
+      </g>
+      <g fill="currentColor">
+        ${arrows[direction]}
+      </g>
+    </svg>
+  `;
+}
+
+/* =========================================================
+   DIAPORAMA
+   ========================================================= */
+
+const container = document.getElementById("slides");
+let index = 0;
+
+s.forEach((item, i) => {
+
+  const div = document.createElement("div");
+  div.className = "slide";
+
+  div.style.backgroundImage = `url("${item.src}")`;
+  div.style.setProperty("--slide-duration", `${slideDuration}s`);
+
+  switch(item.focus) {
+    case "top":
+      div.style.backgroundPosition = "50% 20%";
+      break;
+
+    case "bottom":
+      div.style.backgroundPosition = "50% 80%";
+      break;
+
+    default:
+      div.style.backgroundPosition = "50% 50%";
+  }
+
+  if (i === 0) {
+    div.classList.add("active");
+  }
+
+  container.appendChild(div);
+});
+
+const slides = document.querySelectorAll(".slide");
+
+/* =========================================================
+   ORIENTATION
+   ========================================================= */
+
+const currentOrientationIcon =
+  document.getElementById("currentOrientationIcon");
+
+const currentOrientationLabel =
+  document.getElementById("currentOrientationLabel");
+
+const orientationPanel =
+  document.getElementById("orientation-panel");
+
+const orientationToggle =
+  document.getElementById("orientation-toggle");
+
+const orientationButtons =
+  document.querySelectorAll(".orientation-button");
+
+const orientationNames = {
+  front: "Devant",
+  back: "Derrière",
+  right: "Droite",
+  left: "Gauche"
+};
+
+function updateOrientationUI() {
+
+  const orientation = s[index].orientation || "front";
+
+  currentOrientationIcon.innerHTML =
+    orientationSVG(orientation);
+
+  currentOrientationLabel.textContent =
+    orientationNames[orientation];
+
+  orientationButtons.forEach(button => {
+
+    const buttonOrientation =
+      button.dataset.orientation;
+
+    button.classList.toggle(
+      "active",
+      buttonOrientation === orientation
+    );
+
+  });
+}
+
+/* Active/désactive les boutons selon les orientations réellement présentes */
+function updateAvailableOrientations() {
+
+  orientationButtons.forEach(button => {
+
+    const orientation =
+      button.dataset.orientation;
+
+    const exists =
+      s.some(item => item.orientation === orientation);
+
+    button.classList.toggle("disabled", !exists);
+  });
+}
+
+/* Aller à la première photo correspondant à une orientation */
+function goToOrientation(orientation) {
+
+  const targetIndex =
+    s.findIndex(item => item.orientation === orientation);
+
+  if (targetIndex === -1) return;
+
+  slides[index].classList.remove("active");
+
+  index = targetIndex;
+
+  slides[index].classList.add("active");
+
+  updateOrientationUI();
+}
+
+/* Bouton d’ouverture du panneau */
+orientationToggle.addEventListener("click", () => {
+  orientationPanel.classList.toggle("visible");
+});
+
+/* Les 4 boutons d’orientation */
+orientationButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    if (button.classList.contains("disabled")) return;
+
+    goToOrientation(button.dataset.orientation);
+
+    orientationPanel.classList.remove("visible");
+  });
+
+  const orientation =
+    button.dataset.orientation;
+
+  button.querySelector(".orientation-icon").innerHTML =
+    orientationSVG(orientation);
+});
+
+/* =========================================================
+   DIAPORAMA AUTOMATIQUE
+   ========================================================= */
+
+function next() {
+
+  slides[index].classList.remove("active");
+
+  index = (index + 1) % slides.length;
+
+  slides[index].classList.add("active");
+
+  updateOrientationUI();
+}
+
+updateOrientationUI();
+updateAvailableOrientations();
+
+setInterval(next, slideDuration * 1000);
+
+</script>
+
+</body>
+</html>
